@@ -39,6 +39,38 @@ export function initializeAnimations() {
         }
       }
     );
+
+    // Validation Glitch Matrix
+    const validationText = document.querySelector('.validation-text');
+    if (validationText) {
+      gsap.to(validationText, {
+        scrollTrigger: {
+          trigger: '#validation',
+          start: 'top 80%',
+          once: true,
+          onEnter: () => startGlitchShuffle(validationText)
+        }
+      });
+    }
+
+    // Philosophy Glass Panes Stagger
+    const glassPanes = document.querySelectorAll('.glass-pane');
+    if (glassPanes.length > 0) {
+      gsap.from(glassPanes, { // Changed to gsap.from as they should start hidden/lower
+        y: 20, // Start slightly below
+        opacity: 0, // Start invisible
+        duration: 1,
+        stagger: 0.15,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.philosophy-grid',
+          start: 'top 85%',
+          once: true
+        }
+      });
+    }
+
+    // Contact Section Dropping Animation
   }
 
   // 2. Typography Glitch/Shuffle Reveal (Random Glyphs)

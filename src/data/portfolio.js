@@ -13,37 +13,37 @@ export const portfolioData = {
     projects: [
         {
             id: "p1",
-            title: "Overspeed Security",
-            category: "Brand Identity",
-            image: "/images/WhatsApp Image 2026-02-20 at 04.00.45.jpeg",
+            title: "REVUELE Product Campaign",
+            category: "Commercial Retouching",
+            image: "/images/WhatsApp Image 2026-02-20 at 04.00.51.jpeg",
             strength: 9.5
         },
         {
             id: "p2",
-            title: "RECAN Foundation",
-            category: "Digital Platform",
-            image: "/images/WhatsApp Image 2026-02-20 at 04.00.58.jpeg",
-            strength: 9.0
-        },
-        {
-            id: "p3",
-            title: "The Lost Object",
-            category: "Mobile Application",
-            image: "/images/WhatsApp Image 2026-02-20 at 04.00.51.jpeg",
-            strength: 8.8
-        },
-        {
-            id: "p4",
-            title: "Cinematic Reel",
-            category: "Motion Design",
-            image: "/images/WhatsApp Image 2026-02-20 at 04.00.56.jpeg",
+            title: "Athlete Editorial",
+            category: "Photo Manipulation",
+            image: "/images/WhatsApp Image 2026-02-20 at 04.00.50.jpeg",
             strength: 9.2
         },
         {
+            id: "p3",
+            title: "City Massage Identity",
+            category: "Brand Collateral",
+            image: "/images/WhatsApp Image 2026-02-20 at 04.00.48.jpeg",
+            strength: 9.0
+        },
+        {
+            id: "p4",
+            title: "Zamu Yangu Cover Art",
+            category: "Cinematic Composition",
+            image: "/images/WhatsApp Image 2026-02-20 at 03.58.30.jpeg",
+            strength: 8.8
+        },
+        {
             id: "p5",
-            title: "Nordic Minimal",
-            category: "E-Commerce",
-            image: "/images/WhatsApp Image 2026-02-20 at 04.01.01.jpeg",
+            title: "Corporate Drone Render",
+            category: "3D & Motion Graphics",
+            image: "/images/WhatsApp Image 2026-02-20 at 04.00.49 (1).jpeg",
             strength: 8.5
         }
     ]
