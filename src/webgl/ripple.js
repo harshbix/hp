@@ -36,10 +36,16 @@ export function initRippleEffect() {
     const tCtx = textureCanvas.getContext('2d', { willReadFrequently: true });
 
     function resize() {
-        width = contactSection.offsetWidth;
-        height = contactSection.offsetHeight;
+        // Re-evaluate dimensions based on the concrete layout box
+        width = contactSection.clientWidth;
+        height = Math.max(contactSection.clientHeight, contactSection.offsetHeight);
+
+        // Explicitly set the canvas element size to match the exact container layout
         canvas.width = width;
         canvas.height = height;
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+
         textureCanvas.width = width;
         textureCanvas.height = height;
 
@@ -71,22 +77,38 @@ export function initRippleEffect() {
         texture = tCtx.getImageData(0, 0, width, height);
     }
 
-    window.addEventListener('resize', resize);
-    resize();
+    window.addEventListener('resize', () => {
+        // Small delay allows mobile layouts (like 100vh) to snap before canvas re-calculates
+        setTimeout(resize, 100);
+        resize();
+    });
+
+    // Also observe the contact section specifically in case content shifts height
+    if (window.ResizeObserver) {
+        new ResizeObserver(() => resize()).observe(contactSection);
+    } else {
+        resize();
+    }
 
     let isMouseIn = false;
 
-    contactSection.addEventListener('mousemove', (e) => {
+    // Add touch support for mobile rippling
+    const handleInteraction = (e) => {
         isMouseIn = true;
         const rect = contactSection.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        const mouseX = clientX - rect.left;
+        const mouseY = clientY - rect.top;
         dropAt(mouseX, mouseY);
-    });
+    };
 
-    contactSection.addEventListener('mouseleave', () => {
-        isMouseIn = false;
-    });
+    contactSection.addEventListener('mousemove', handleInteraction);
+    contactSection.addEventListener('touchmove', handleInteraction, { passive: true });
+    contactSection.addEventListener('touchstart', handleInteraction, { passive: true });
+
+    contactSection.addEventListener('mouseleave', () => isMouseIn = false);
+    contactSection.addEventListener('touchend', () => isMouseIn = false);
 
     function dropAt(x, y) {
         x = Math.floor(x);
