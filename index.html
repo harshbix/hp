@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HP Graphics | Digital Gallery of Visual Authority</title>
+
+  <!-- Modern Google Fonts: Inter for elegant readability -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Three.js Canvas Container -->
+  <div id="webgl-container"></div>
+
+  <main id="app">
+    <section id="hero" class="section">
+      <div class="container hero-container">
+        <div class="hero-content">
+          <h1 class="hero-title" data-split>HP Graphics<br><span class="hero-subtitle">Visual Identity & Image
+              Design</span></h1>
+          <p class="hero-text" data-split>Sculpting Visual Legacies</p>
+        </div>
+
+        <div class="magnetic-wrap" id="magnetic-btn-wrap">
+          <button class="magnetic-btn cta-glow" id="magnetic-btn">
+            <span class="magnetic-text">Book<br>Work</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- All subsequent content wrapped for zoom transition scale reference -->
+    <div id="content-track" class="content-track">
+      <section id="validation" class="section loop-content">
+        <div class="container">
+          <p class="validation-text glitch-target">10+ High Quality Projects Completed</p>
+        </div>
+      </section>
+
+      <section id="philosophy" class="section loop-content">
+        <div class="container">
+          <h2 class="section-title glitch-target">Philosophy</h2>
+          <p class="philosophy-text" data-split>I design identities that outlive trends.<br>Every visual system I create
+            is engineered for recognition.<br>Design is not decoration. It is memory architecture.</p>
+        </div>
+      </section>
+
+      <section id="experience" class="section loop-content">
+        <div class="container">
+          <h2 class="section-title glitch-target">Experience</h2>
+          <p class="experience-sub">Visual Identity & Image Design Expertise</p>
+          <ul class="experience-list">
+            <li><span class="exp-label">Years Active:</span> 2022 — Present</li>
+            <li>Brand Symbol Engineering</li>
+            <li>Campaign Visual Systems</li>
+            <li>Image Refinement & Narrative Retouch</li>
+            <li>Creative Direction</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="selected-works" class="section loop-content">
+        <div class="container">
+          <h2 class="section-title glitch-target">Selected Works</h2>
+          <div class="gallery-grid" id="gallery">
+            <!-- Dynamically populated via JS -->
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonials" class="section loop-content">
+        <div class="container">
+          <div class="testimonial-wrapper">
+            <h3 class="testimonial-quote" data-split>"Professional Brand Designer focused on creating strategic and
+              timeless visual identities for growing businesses."</h3>
+            <p class="testimonial-author">— Short Bio</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing" class="section loop-content">
+        <div class="container">
+          <h2 class="section-title glitch-target">Investment</h2>
+          <p class="pricing-sub">Commission Tiers</p>
+          <div class="pricing-grid">
+            <div class="pricing-card">
+              <h3>Brand Identity</h3>
+              <p>Complete visual systems engineered for recognition.</p>
+              <div class="price">From $800</div>
+              <button class="book-this-btn" data-service="Brand Identity">Book This</button>
+            </div>
+            <div class="pricing-card">
+              <h3>Campaign Design</h3>
+              <p>Posters, flyers, and cohesive social narrative layouts.</p>
+              <div class="price">From $400</div>
+              <button class="book-this-btn" data-service="Campaign Design">Book This</button>
+            </div>
+            <div class="pricing-card">
+              <h3>Photography & Retouch</h3>
+              <p>Image refinement and studio composition editing.</p>
+              <div class="price">From $250</div>
+              <button class="book-this-btn" data-service="Photography">Book This</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section loop-content">
+        <div class="container">
+          <h2 class="contact-headline glitch-target">Start a Visual Project</h2>
+          <p class="contact-sub">Available for identity, campaign, and image design commissions.</p>
+          <button class="contact-link" id="footer-book-btn">Open Booking Panel</button>
+        </div>
+      </section>
+    </div> <!-- End content-track -->
+
+    <!-- Booking Cinematic Overlay -->
+    <div id="booking-overlay" class="booking-overlay hidden">
+      <div class="booking-bg-blur"></div>
+      <button id="close-booking" class="close-booking-btn">CLOSE</button>
+      <div class="booking-panel">
+        <h2 class="booking-title glitch-target">Commission Request</h2>
+        <form id="booking-form" class="booking-form">
+          <div class="input-group">
+            <label for="service">Service Type</label>
+            <select id="service" name="service" required>
+              <option value="Brand Identity">Brand Identity</option>
+              <option value="Campaign Design">Campaign Design</option>
+              <option value="Photography">Photography</option>
+              <option value="Custom Project">Custom Project</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="input-group">
+              <label for="date">Preferred Date</label>
+              <input type="date" id="date" name="date" required />
+            </div>
+            <div class="input-group">
+              <label for="time">Preferred Time</label>
+              <input type="time" id="time" name="time" required />
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="John Doe" required />
+          </div>
+          <div class="input-group">
+            <label for="phone">Your Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="+255..." required />
+          </div>
+          <button type="submit" class="submit-booking-btn">Submit Request via WhatsApp</button>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
