@@ -28,15 +28,30 @@ export function initCustomCursor() {
         }
     });
 
-    // Smooth follow via requestAnimationFrame
+    // Smooth follow via requestAnimationFrame - Snappier interpolation
     function renderCursor() {
-        cursorX += (mouseX - cursorX) * 0.15;
-        cursorY += (mouseY - cursorY) * 0.15;
+        cursorX += (mouseX - cursorX) * 0.65;
+        cursorY += (mouseY - cursorY) * 0.65;
 
         gsap.set(cursor, { x: cursorX, y: cursorY });
         requestAnimationFrame(renderCursor);
     }
     requestAnimationFrame(renderCursor);
+
+    // State Manager
+    function updateCursorState() {
+        if (cursor.classList.contains('hover-active')) {
+            cursorText.innerText = '';
+        } else if (cursor.classList.contains('hover-view')) {
+            cursorText.innerText = 'Explore';
+        } else if (cursor.classList.contains('hover-water')) {
+            cursorText.innerText = '+';
+        } else if (cursor.classList.contains('hover-hero')) {
+            cursorText.innerText = 'Drag';
+        } else {
+            cursorText.innerText = '';
+        }
+    }
 
     // Contextual Hover Logic
     const interactiveElements = document.querySelectorAll('a, button, input, select, .magnetic-btn');
@@ -48,10 +63,11 @@ export function initCustomCursor() {
     interactiveElements.forEach(el => {
         el.addEventListener('mouseenter', () => {
             cursor.classList.add('hover-active');
-            cursorText.innerText = '';
+            updateCursorState();
         });
         el.addEventListener('mouseleave', () => {
             cursor.classList.remove('hover-active');
+            updateCursorState();
         });
     });
 
@@ -59,11 +75,11 @@ export function initCustomCursor() {
     projectCards.forEach(card => {
         card.addEventListener('mouseenter', () => {
             cursor.classList.add('hover-view');
-            cursorText.innerText = 'Explore';
+            updateCursorState();
         });
         card.addEventListener('mouseleave', () => {
             cursor.classList.remove('hover-view');
-            cursorText.innerText = '';
+            updateCursorState();
         });
     });
 
@@ -71,13 +87,11 @@ export function initCustomCursor() {
     if (heroSection) {
         heroSection.addEventListener('mouseenter', () => {
             cursor.classList.add('hover-hero');
-            if (!cursor.classList.contains('hover-active')) {
-                cursorText.innerText = 'Drag';
-            }
+            updateCursorState();
         });
         heroSection.addEventListener('mouseleave', () => {
             cursor.classList.remove('hover-hero');
-            cursorText.innerText = '';
+            updateCursorState();
         });
     }
 
@@ -85,11 +99,11 @@ export function initCustomCursor() {
     if (contactSection) {
         contactSection.addEventListener('mouseenter', () => {
             cursor.classList.add('hover-water');
-            cursorText.innerText = 'Ripple';
+            updateCursorState();
         });
         contactSection.addEventListener('mouseleave', () => {
             cursor.classList.remove('hover-water');
-            cursorText.innerText = '';
+            updateCursorState();
         });
     }
 }

@@ -45,7 +45,11 @@ body {
     pointer-events: none;
     z-index: 9999;
     mix-blend-mode: difference;
-    transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, mix-blend-mode 0.3s ease;
+    transition: width 0.15s cubic-bezier(0.19, 1, 0.22, 1),
+        height 0.15s cubic-bezier(0.19, 1, 0.22, 1),
+        background-color 0.15s ease,
+        mix-blend-mode 0.15s ease,
+        border-color 0.15s ease;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -63,9 +67,10 @@ body {
 
 /* Cursor States */
 #custom-cursor.hover-active {
-    width: 6px;
-    height: 6px;
-    background-color: rgba(255, 255, 255, 0.5);
+    width: 6px !important;
+    height: 6px !important;
+    background-color: rgba(255, 255, 255, 0.5) !important;
+    border: none !important;
 }
 
 #custom-cursor.hover-view {
@@ -93,17 +98,20 @@ body {
 }
 
 #custom-cursor.hover-water {
-    width: 100px;
-    height: 100px;
+    width: 40px;
+    height: 40px;
     background-color: transparent;
-    border: 1px dashed rgba(255, 255, 255, 0.3);
-    mix-blend-mode: normal;
-    animation: rotateCursor 10s linear infinite;
+    border: none;
+    mix-blend-mode: difference;
+    animation: none;
 }
 
 #custom-cursor.hover-water .cursor-text {
     opacity: 1;
-    color: rgba(255, 255, 255, 0.8);
+    color: #fff;
+    font-size: 36px;
+    line-height: 1;
+    font-weight: 200;
 }
 
 @keyframes rotateCursor {
