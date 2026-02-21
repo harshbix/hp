@@ -115,8 +115,9 @@ export function initializeAnimations() {
     observer.observe(target);
   });
 
-  // 3. Magnetic Button Logic
+  // 3. Magnetic specific button logic
   initMagneticButton();
+  initGlobalMagneticButtons();
 
   // 4. Standard Text Node Splits (For non-glitch elements)
   const splitTexts = document.querySelectorAll('[data-split]');
@@ -203,5 +204,24 @@ function initMagneticButton() {
   wrap.addEventListener('mouseleave', () => {
     gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.3)' });
     gsap.to(text, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.3)' });
+  });
+}
+
+function initGlobalMagneticButtons() {
+  const dynamicBtns = document.querySelectorAll('.book-this-btn, .submit-booking-btn, .contact-link');
+
+  dynamicBtns.forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      // Keep structural pull subtle (0.15 velocity multiplier)
+      gsap.to(btn, { x: x * 0.15, y: y * 0.15, duration: 0.4, ease: 'power2.out' });
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.3)' });
+    });
   });
 }

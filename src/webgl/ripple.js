@@ -35,10 +35,21 @@ export function initRippleEffect() {
     const textureCanvas = document.createElement('canvas');
     const tCtx = textureCanvas.getContext('2d', { willReadFrequently: true });
 
+    let lastWidth = 0;
+    let lastHeight = 0;
+
     function resize() {
-        // Re-evaluate dimensions based on the concrete layout box
-        width = contactSection.clientWidth;
-        height = Math.max(contactSection.clientHeight, contactSection.offsetHeight);
+        const newWidth = Math.floor(contactSection.clientWidth);
+        const newHeight = Math.floor(Math.max(contactSection.clientHeight, contactSection.offsetHeight));
+
+        // Abort if hidden or unchanged to prevent buffer corruption
+        if (newWidth === 0 || newHeight === 0) return;
+        if (newWidth === lastWidth && newHeight === lastHeight) return;
+
+        width = newWidth;
+        height = newHeight;
+        lastWidth = width;
+        lastHeight = height;
 
         // Explicitly set the canvas element size to match the exact container layout
         canvas.width = width;
@@ -80,7 +91,6 @@ export function initRippleEffect() {
     window.addEventListener('resize', () => {
         // Small delay allows mobile layouts (like 100vh) to snap before canvas re-calculates
         setTimeout(resize, 100);
-        resize();
     });
 
     // Also observe the contact section specifically in case content shifts height
@@ -98,8 +108,8 @@ export function initRippleEffect() {
         const rect = contactSection.getBoundingClientRect();
         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
         const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-        const mouseX = clientX - rect.left;
-        const mouseY = clientY - rect.top;
+        const mouseX = Math.floor(clientX - rect.left);
+        const mouseY = Math.floor(clientY - rect.top);
         dropAt(mouseX, mouseY);
     };
 

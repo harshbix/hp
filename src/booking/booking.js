@@ -91,7 +91,7 @@ export function initBookingOverlay() {
 
                 // Fire Redirect and Reset
                 setTimeout(() => {
-                    window.open(whatsappUrl, '_blank');
+                    window.location.href = whatsappUrl;
                     closeModal(overlay);
 
                     // Reset Form and Button after hidden
