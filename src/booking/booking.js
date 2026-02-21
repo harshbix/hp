@@ -61,6 +61,16 @@ export function initBookingOverlay() {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
+            const submitBtn = form.querySelector('.submit-booking-btn');
+            const btnText = submitBtn.querySelector('.btn-text');
+
+            if (submitBtn.classList.contains('is-loading') || submitBtn.classList.contains('is-success')) return;
+
+            // Loading State
+            submitBtn.classList.add('is-loading');
+            const originalText = btnText.innerText;
+            btnText.innerText = 'Generating Protocol...';
+
             const service = document.getElementById('service').value;
             const date = document.getElementById('date').value;
             const time = document.getElementById('time').value;
@@ -72,9 +82,26 @@ export function initBookingOverlay() {
             const encodedMessage = encodeURIComponent(message);
             const whatsappUrl = `https://wa.me/255628818312?text=${encodedMessage}`;
 
-            window.open(whatsappUrl, '_blank');
-            closeModal(overlay);
-            form.reset();
+            // Simulate Network / Processing Delay
+            setTimeout(() => {
+                // Success State
+                submitBtn.classList.remove('is-loading');
+                submitBtn.classList.add('is-success');
+                btnText.innerText = 'Success!';
+
+                // Fire Redirect and Reset
+                setTimeout(() => {
+                    window.open(whatsappUrl, '_blank');
+                    closeModal(overlay);
+
+                    // Reset Form and Button after hidden
+                    setTimeout(() => {
+                        form.reset();
+                        submitBtn.classList.remove('is-success');
+                        btnText.innerText = originalText;
+                    }, 800);
+                }, 600);
+            }, 1200);
         });
     }
 }
