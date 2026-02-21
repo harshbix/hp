@@ -13,7 +13,7 @@ export function initializeAnimations() {
   if (heroElement && contentTrack) {
     gsap.to(heroElement, {
       scale: 1.25,
-      y: '-15vh',
+      y: '-25vh', // Adjusted for stronger typography effect
       filter: 'blur(4px)',
       opacity: 0.85,
       ease: 'none',
@@ -92,13 +92,30 @@ export function initializeAnimations() {
     new SplitType(el, { types: 'lines, words', lineClass: 'line', wordClass: 'word' });
   });
 
+  // 2. Hero Orchestration
+  // Find words specifically inside the hero section, but make sure they exist
+  // We need to wait a tick for SplitType to finish constructing the DOM elements
+  setTimeout(() => {
+    const heroWords = document.querySelectorAll('#hero .word');
+    const tl = gsap.timeline();
+
+    if (heroWords.length > 0) {
+      tl.to(heroWords, {
+        y: 0,
+        stagger: 0.05,
+        duration: 1.2,
+        ease: 'power4.out',
+        delay: 0.1
+      });
+    }
+  }, 50);
+
   const sections = document.querySelectorAll('.section:not(#hero)');
   sections.forEach(section => {
     const words = section.querySelectorAll('.word');
     if (words.length > 0) {
       gsap.to(words, {
         y: 0,
-        skewY: 0,
         stagger: 0.015,
         duration: 0.8,
         ease: 'power3.out',
@@ -124,19 +141,6 @@ export function initializeAnimations() {
       }
     });
   });
-
-  // 6. Infinite Scroll Loop (Seamless Wrap to top)
-  const contactSection = document.getElementById('contact');
-  if (contactSection) {
-    ScrollTrigger.create({
-      trigger: contactSection,
-      start: "bottom bottom",
-      onEnter: () => {
-        // Reset scroll position to top instantly without smooth scrolling
-        window.scrollTo({ top: 0, behavior: 'instant' });
-      }
-    });
-  }
 }
 
 function initMagneticButton() {

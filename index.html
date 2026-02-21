@@ -69,6 +69,9 @@
           <div class="gallery-grid" id="gallery">
             <!-- Dynamically populated via JS -->
           </div>
+          <div class="archive-trigger-wrap" style="text-align: center; margin-top: 6rem;">
+            <button id="open-archive" class="book-this-btn">Launch Full Archive</button>
+          </div>
         </div>
       </section>
 
@@ -109,14 +112,62 @@
         </div>
       </section>
 
-      <section id="contact" class="section loop-content">
+      <section id="contact" class="section loop-content contact-drop">
         <div class="container">
           <h2 class="contact-headline glitch-target">Start a Visual Project</h2>
           <p class="contact-sub">Available for identity, campaign, and image design commissions.</p>
           <button class="contact-link" id="footer-book-btn">Open Booking Panel</button>
+
+          <div class="footer-bottom">
+            <div class="social-links">
+              <a href="#" target="_blank" class="social-link">Instagram</a>
+              <a href="#" target="_blank" class="social-link">Behance</a>
+              <a href="#" target="_blank" class="social-link">LinkedIn</a>
+            </div>
+            <div class="creator-credit">
+              Site by <a href="https://jeconiajunior.vercel.app" target="_blank" class="credit-link">JuniorJeconia</a>
+            </div>
+          </div>
         </div>
       </section>
     </div> <!-- End content-track -->
+
+    <!-- Archive Gallery Cinematic Overlay -->
+    <div id="archive-overlay" class="booking-overlay hidden">
+      <div class="booking-bg-blur"></div>
+      <button id="close-archive" class="close-booking-btn">CLOSE ARCHIVE</button>
+      <div class="booking-panel archive-panel" style="max-width: 900px; height: 80vh; overflow-y: auto;">
+        <h2 class="booking-title glitch-target" style="text-align: left;">Extended Archive</h2>
+        <div class="archive-grid"
+          style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 2rem;">
+          <!-- Dummy Archive Items -->
+          <div class="archive-item">
+            <div style="background:#222; aspect-ratio:1; margin-bottom:1rem;"></div>
+            <p>Project Alpha 2023</p>
+          </div>
+          <div class="archive-item">
+            <div style="background:#222; aspect-ratio:1; margin-bottom:1rem;"></div>
+            <p>Studio Concept 04</p>
+          </div>
+          <div class="archive-item">
+            <div style="background:#222; aspect-ratio:1; margin-bottom:1rem;"></div>
+            <p>Typeface Study Y</p>
+          </div>
+          <div class="archive-item">
+            <div style="background:#222; aspect-ratio:1; margin-bottom:1rem;"></div>
+            <p>Editorial Print 22</p>
+          </div>
+          <div class="archive-item">
+            <div style="background:#222; aspect-ratio:1; margin-bottom:1rem;"></div>
+            <p>Overspeed Rebrand</p>
+          </div>
+          <div class="archive-item">
+            <div style="background:#222; aspect-ratio:1; margin-bottom:1rem;"></div>
+            <p>Darkmode UI</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Booking Cinematic Overlay -->
     <div id="booking-overlay" class="booking-overlay hidden">

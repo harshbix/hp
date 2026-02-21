@@ -28,6 +28,92 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    cursor: none;
+    /* Custom cursor handles this */
+}
+
+/* --- Custom Cursor --- */
+#custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, mix-blend-mode 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cursor-text {
+    font-size: 10px;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    mix-blend-mode: normal;
+}
+
+/* Cursor States */
+#custom-cursor.hover-active {
+    width: 6px;
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+#custom-cursor.hover-view {
+    width: 80px;
+    height: 80px;
+    background-color: #fff;
+    mix-blend-mode: normal;
+}
+
+#custom-cursor.hover-view .cursor-text {
+    opacity: 1;
+}
+
+#custom-cursor.hover-hero {
+    width: 60px;
+    height: 60px;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    mix-blend-mode: normal;
+}
+
+#custom-cursor.hover-hero .cursor-text {
+    opacity: 1;
+    color: #fff;
+}
+
+#custom-cursor.hover-water {
+    width: 100px;
+    height: 100px;
+    background-color: transparent;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+    mix-blend-mode: normal;
+    animation: rotateCursor 10s linear infinite;
+}
+
+#custom-cursor.hover-water .cursor-text {
+    opacity: 1;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+@keyframes rotateCursor {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 
 /* Hyper-minimal scrollbar */
@@ -237,8 +323,11 @@ h4 {
 }
 
 .word {
-    transform: translateY(110%) skewY(5deg);
+    transform: translateY(110%);
+    /* Removed skewY for cleaner aesthetic */
     will-change: transform;
+    display: inline-block;
+    /* Essential for SplitType transforms */
 }
 
 /* --- Validation & Philosophy --- */
@@ -457,11 +546,17 @@ h4 {
     color: #000;
 }
 
-/* --- Contact Section --- */
+/* --- Contact Section & Footer --- */
 #contact {
     text-align: center;
-    padding: clamp(10rem, 20vw, 20rem) 0;
+    padding: clamp(10rem, 20vw, 20rem) 0 4rem 0;
+    /* Reduced bottom padding for footer alignment */
     border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: #050505;
+    /* Deep ground for water ripple */
+    position: relative;
+    /* Essential for WebGL ripple canvas bounds */
+    will-change: transform;
 }
 
 .contact-headline {
@@ -473,6 +568,54 @@ h4 {
     font-size: clamp(18px, 1.5vw, 24px);
     color: var(--color-text-secondary);
     margin-bottom: 4rem;
+}
+
+.footer-bottom {
+    margin-top: clamp(8rem, 15vw, 12rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.05em;
+    position: relative;
+    z-index: 5;
+}
+
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.social-link {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: opacity 0.3s ease;
+}
+
+.social-link:hover {
+    opacity: 0.6;
+}
+
+.creator-credit {
+    text-transform: uppercase;
+}
+
+.credit-link {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 2px;
+    transition: border-color 0.3s ease;
+}
+
+.credit-link:hover {
+    border-color: #fff;
 }
 
 /* --- Booking Cinematic Overlay --- */

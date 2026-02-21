@@ -6,6 +6,8 @@ import { initWebGL } from './webgl/scene';
 import { initializeAnimations } from './motion/animations';
 import { renderProjects } from './data/portfolio';
 import { initBookingOverlay } from './booking/booking';
+import { initCustomCursor } from './motion/cursors';
+import { initRippleEffect } from './webgl/ripple';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,6 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initWebGL();
     renderProjects();
     initBookingOverlay();
+    initCustomCursor();
+    initRippleEffect();
 
     // Slight delay for animations to ensure DOM is ready
     setTimeout(() => {
